@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment — NEVER commit these
+.env
+.env.local
+.env.production
+
+# Database files — stored in Railway volume, not git
+credionpay_db.json
+credionpay_cards.json
+credionpay_savings.json
+credionpay_acct_cache.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
