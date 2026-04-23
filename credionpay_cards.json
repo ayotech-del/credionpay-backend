@@ -1,1 +1,30 @@
-{}
+{
+  "VCR-AA11BB2233": {
+    "card_id": "VCR-AA11BB2233",
+    "wallet_id": "WAL-A1B2C3D4E5",
+    "card_number": "4111111111112233",
+    "masked_number": "**** **** **** 2233",
+    "expiry": "12/27",
+    "cvv": "452",
+    "card_type": "Visa",
+    "currency": "NGN",
+    "balance": 45000.0,
+    "status": "active",
+    "created_at": "2024-11-06T11:30:00.000000",
+    "sudo_card_id": ""
+  },
+  "VCR-BB22CC3344": {
+    "card_id": "VCR-BB22CC3344",
+    "wallet_id": "WAL-D4E5F6G7H8",
+    "card_number": "4111111111113344",
+    "masked_number": "**** **** **** 3344",
+    "expiry": "09/28",
+    "cvv": "731",
+    "card_type": "Visa",
+    "currency": "NGN",
+    "balance": 88000.0,
+    "status": "active",
+    "created_at": "2024-08-21T09:15:00.000000",
+    "sudo_card_id": ""
+  }
+}
