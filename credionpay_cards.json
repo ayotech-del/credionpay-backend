@@ -1,1 +1,26 @@
-{}
+{
+  "VCR-1A4BC26E6E": {
+    "card_id": "VCR-1A4BC26E6E",
+    "wallet_id": "WAL-A30F2DDDE0",
+    "card_type": "Visa USD Demo",
+    "card_number": "4111111111111111",
+    "expiry": "12/26",
+    "cvv": "123",
+    "balance": 6.29,
+    "currency": "USD",
+    "status": "active",
+    "created_at": "2024-01-15T10:30:00Z"
+  },
+  "VCR-E102B931D2": {
+    "card_id": "VCR-E102B931D2",
+    "wallet_id": "WAL-A30F2DDDE0",
+    "card_type": "Visa USD Demo",
+    "card_number": "4111111111111112",
+    "expiry": "12/26",
+    "cvv": "456",
+    "balance": 0.63,
+    "currency": "USD",
+    "status": "active",
+    "created_at": "2024-02-20T14:45:00Z"
+  }
+}
