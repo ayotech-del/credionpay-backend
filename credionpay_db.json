@@ -1,0 +1,574 @@
+{
+  "WAL-A30F2DDDE0": {
+    "wallet_id": "WAL-A30F2DDDE0",
+    "owner_name": "Ethan Ayoraheem",
+    "owner_email": "Nairaflow@ayotechcom.com",
+    "phone": "6827066108",
+    "password_hash": "",
+    "balance": 30000.0,
+    "is_active": true,
+    "created_at": "2026-03-22T15:59:05.461164",
+    "kyc": {
+      "bvn": "enc:gAAAAABpwFg-j764YffDKP4loSeqWgLdIXZOYbTQkhaFuyzCroo20yzU-luEO6OxrzCUeR8ZutU-My6zO-AOzV3dk5ClxGSslA==",
+      "nin": "",
+      "full_name": "Paystack Test Account",
+      "dob": "2002-01-01",
+      "address": "",
+      "phone": "6827066108",
+      "account_number": "0000000000",
+      "bank_code": "044",
+      "bank_name": "Access Bank",
+      "account_name": "Paystack Test Account",
+      "registered_cards": [],
+      "status": "verified",
+      "verified_at": "2026-03-22T15:59:42.070380",
+      "failure_reason": ""
+    },
+    "virtual_cards": [],
+    "transactions": [
+      {
+        "tx_id": "TX-32E6AA425335",
+        "tx_type": "CREDIT",
+        "category": "CARD_FUNDING",
+        "amount": 30000.0,
+        "balance_after": 30000.0,
+        "status": "success",
+        "description": "Wallet top-up via Card",
+        "reference": "FUND-688175203297404F",
+        "timestamp": "2026-03-22T16:01:05.785053"
+      },
+      {
+        "tx_id": "TX-44164951BA5A",
+        "tx_type": "CREDIT",
+        "category": "usd_receive",
+        "amount": 0.01,
+        "balance_after": 30000.01,
+        "status": "success",
+        "description": "USD received from @nairaflow/ayotest \u2014 $5.00 (\u2248\u20a67,950)",
+        "reference": "USD-SEND-E4B30BC87E",
+        "timestamp": "2026-03-23T21:28:11.694149"
+      }
+    ],
+    "usd_balance": 5.0,
+    "usd_tag": "@credionpay/ethanayoraheem2",
+    "virtual_acct_uk": {
+      "bank_name": "Flutterwave / Lloyds UK",
+      "sort_code": "04-00-75",
+      "account_no": "74048363",
+      "account_name": "Ethan Ayoraheem",
+      "currency": "GBP",
+      "reference": "@credionpay/ethanayoraheem2"
+    },
+    "virtual_acct_us": {
+      "bank_name": "Flutterwave / Evolve Bank USA",
+      "routing_no": "026073150",
+      "account_no": "931239095",
+      "account_name": "Ethan Ayoraheem",
+      "currency": "USD",
+      "reference": "@credionpay/ethanayoraheem2"
+    },
+    "dva": {},
+    "invoices": []
+  },
+  "WAL-B333D51931": {
+    "wallet_id": "WAL-B333D51931",
+    "owner_name": "Paystack Test Acccount Paystack  Paystack Test Acccount",
+    "owner_email": "nairaflow@ayotechcom.com",
+    "phone": "6827066108",
+    "password_hash": "",
+    "balance": 28200.0,
+    "is_active": true,
+    "created_at": "2026-03-23T20:21:47.818156",
+    "kyc": {
+      "bvn": "enc:gAAAAABpwedSS4HKR96Zp_np0PrIXPTSYiDhPvmDpq0m2LGB8cYNNqkTa1cnmvzrVc6CwCuoO4rjnvMUPBJe2Kj4HPpGFZB3AQ==",
+      "nin": "",
+      "full_name": "Paystack Test Acccount Paystack  Paystack Test Acccount",
+      "dob": "2000-03-04",
+      "address": "",
+      "phone": "6827066108",
+      "account_number": "0000000000",
+      "bank_code": "044",
+      "bank_name": "Access Bank",
+      "account_name": "Paystack Test Account",
+      "registered_cards": [],
+      "status": "verified",
+      "verified_at": "2026-03-23T20:22:26.089482",
+      "failure_reason": ""
+    },
+    "virtual_cards": [],
+    "transactions": [
+      {
+        "tx_id": "TX-BD70455B39EC",
+        "tx_type": "CREDIT",
+        "category": "CARD_FUNDING",
+        "amount": 40000.0,
+        "balance_after": 40000.0,
+        "status": "success",
+        "description": "Wallet top-up via Card",
+        "reference": "FUND-59872BF76DBF4D79",
+        "timestamp": "2026-03-23T20:23:40.477702"
+      },
+      {
+        "tx_id": "TX-0FE89BDFE646",
+        "tx_type": "DEBIT",
+        "category": "usd_fund",
+        "amount": 31800.0,
+        "balance_after": 8200.0,
+        "status": "success",
+        "description": "USD wallet funding \u2014 $20.00",
+        "reference": "USD-FUND-69158C2A",
+        "timestamp": "2026-03-23T21:27:15.443348"
+      },
+      {
+        "tx_id": "TX-F8281AE79203",
+        "tx_type": "DEBIT",
+        "category": "usd_send",
+        "amount": 0.01,
+        "balance_after": 8199.99,
+        "status": "success",
+        "description": "USD sent to @nairaflow/ethanayoraheem \u2014 $5.00 (\u2248\u20a67,950) USD transfer to @nairaflow/ethanayoraheem",
+        "reference": "USD-SEND-E4B30BC87E",
+        "timestamp": "2026-03-23T21:28:11.694104"
+      },
+      {
+        "tx_id": "TX-3FF82DC3F498",
+        "tx_type": "CREDIT",
+        "category": "CARD_FUNDING",
+        "amount": 20000.0,
+        "balance_after": 28200.0,
+        "status": "success",
+        "description": "Wallet top-up via Card",
+        "reference": "FUND-A8B86799A6EE4F19",
+        "timestamp": "2026-04-20T16:52:45.006555"
+      }
+    ],
+    "usd_balance": 15.0,
+    "usd_tag": "@credionpay/paystacktestacccount",
+    "virtual_acct_uk": {
+      "bank_name": "Flutterwave / Lloyds UK",
+      "sort_code": "04-00-75",
+      "account_no": "76594905",
+      "account_name": "Paystack Test Acccount Paystack  Paystack Test Acccount",
+      "currency": "GBP",
+      "reference": "@credionpay/paystacktestacccount"
+    },
+    "virtual_acct_us": {
+      "bank_name": "Flutterwave / Evolve Bank USA",
+      "routing_no": "026073150",
+      "account_no": "963474727",
+      "account_name": "Paystack Test Acccount Paystack  Paystack Test Acccount",
+      "currency": "USD",
+      "reference": "@credionpay/paystacktestacccount"
+    },
+    "dva": {},
+    "invoices": []
+  },
+  "WAL-1DBD3D4BCB": {
+    "wallet_id": "WAL-1DBD3D4BCB",
+    "owner_name": "Jim Jones",
+    "owner_email": "ayoraheem2000@gmail.com",
+    "phone": "6827066108",
+    "password_hash": "",
+    "balance": 20000.0,
+    "is_active": true,
+    "created_at": "2026-03-26T21:44:56.528369",
+    "kyc": {
+      "bvn": "enc:gAAAAABpxe_o86dxZy1YMqcUhqtqBvr8x_mtK3Q5w913oCLK-ClwOsq47fmrPndLN7sWHbpQiYsN3g4obiNEVhnAGAyp1T8alA==",
+      "nin": "",
+      "full_name": "Jim Jones",
+      "dob": "2001-01-01",
+      "address": "",
+      "phone": "6827066108",
+      "account_number": "0000000000",
+      "bank_code": "044",
+      "bank_name": "Access Bank",
+      "account_name": "Paystack Test Account",
+      "registered_cards": [],
+      "status": "verified",
+      "verified_at": "2026-03-26T21:48:08.889306",
+      "failure_reason": ""
+    },
+    "virtual_cards": [
+      "VCR-1A4BC26E6E"
+    ],
+    "transactions": [
+      {
+        "tx_id": "TX-5BDE215A20D1",
+        "tx_type": "CREDIT",
+        "category": "CARD_FUNDING",
+        "amount": 30000.0,
+        "balance_after": 30000.0,
+        "status": "success",
+        "description": "Wallet top-up via Card",
+        "reference": "FUND-9B1E7E96AE7A4C12",
+        "timestamp": "2026-03-26T21:49:19.563864"
+      },
+      {
+        "tx_id": "TX-2CE405429A10",
+        "tx_type": "DEBIT",
+        "category": "VIRTUAL_CARD_DEBIT",
+        "amount": 10000.0,
+        "balance_after": 20000.0,
+        "status": "success",
+        "description": "Virtual card \u2014 VCR-1A4BC26E6E",
+        "reference": "VCR-924F1773F6D4",
+        "timestamp": "2026-03-26T21:49:41.988748"
+      }
+    ],
+    "usd_balance": 0.0,
+    "usd_tag": "@credionpay/jimjones",
+    "virtual_acct_uk": {
+      "bank_name": "Flutterwave / Lloyds UK",
+      "sort_code": "04-00-75",
+      "account_no": "73244743",
+      "account_name": "Jim Jones",
+      "currency": "GBP",
+      "reference": "@credionpay/jimjones"
+    },
+    "virtual_acct_us": {
+      "bank_name": "Flutterwave / Evolve Bank USA",
+      "routing_no": "026073150",
+      "account_no": "932447438",
+      "account_name": "Jim Jones",
+      "currency": "USD",
+      "reference": "@credionpay/jimjones"
+    },
+    "dva": {
+      "bank_name": "Wema Bank",
+      "bank_code": "035",
+      "account_number": "063c6c66c0",
+      "account_name": "JIM JONES",
+      "reference": "NF-DVA-WAL-1DBD3D4BCB",
+      "currency": "NGN",
+      "mode": "demo",
+      "note": "Demo account. Switch to Paystack live key to get a real account number."
+    },
+    "invoices": []
+  },
+  "WAL-0FFEEED536": {
+    "wallet_id": "WAL-0FFEEED536",
+    "owner_name": "Ethan Ayoraheem",
+    "owner_email": "ethanraheem202@gmail.com",
+    "phone": "6827066108",
+    "password_hash": "8cd425cebad44e1da9880759730ed71b:8ab6a6c0b7926a567b0eafbbcc7a7216b7bdf4cb152a41fae787c150e58681ff",
+    "balance": 0.0,
+    "is_active": true,
+    "created_at": "2026-04-13T20:58:57.441001",
+    "kyc": {
+      "bvn": "enc:gAAAAABp3aCGslKgYvhVyWMrMuqp7E9J5-wEDS1xTfA1QYX_S0Vpx3JYTe6mdaAT259qXuu-e-ztWIy61gUz-HCFR4WRA7bCIA==",
+      "nin": "",
+      "full_name": "Ethan Ayoraheem",
+      "dob": "2017-06-18",
+      "address": "1651 TIMSPON DR",
+      "phone": "6827066108",
+      "account_number": "0000000000",
+      "bank_code": "044",
+      "bank_name": "Access Bank",
+      "account_name": "Paystack Test Account",
+      "registered_cards": [],
+      "status": "verified",
+      "verified_at": "2026-04-13T21:03:50.917796",
+      "failure_reason": ""
+    },
+    "virtual_cards": [
+      "VCR-E102B931D2"
+    ],
+    "transactions": [
+      {
+        "tx_id": "TX-4FB59A07F6C7",
+        "tx_type": "CREDIT",
+        "category": "CARD_FUNDING",
+        "amount": 1000.0,
+        "balance_after": 1000.0,
+        "status": "success",
+        "description": "Wallet top-up via Card",
+        "reference": "FUND-0F7962BA70174A40",
+        "timestamp": "2026-04-13T21:05:20.236638"
+      },
+      {
+        "tx_id": "TX-B9C4577E60DF",
+        "tx_type": "DEBIT",
+        "category": "VIRTUAL_CARD_DEBIT",
+        "amount": 1000.0,
+        "balance_after": 0.0,
+        "status": "success",
+        "description": "Virtual card \u2014 VCR-E102B931D2",
+        "reference": "VCR-73146D380376",
+        "timestamp": "2026-04-13T21:06:31.878016"
+      }
+    ],
+    "usd_balance": 0.0,
+    "usd_tag": "@credionpay/ethanayoraheem",
+    "virtual_acct_uk": {
+      "bank_name": "Flutterwave / Lloyds UK",
+      "sort_code": "04-00-75",
+      "account_no": "73128184",
+      "account_name": "Ethan Ayoraheem",
+      "currency": "GBP",
+      "reference": "@credionpay/ethanayoraheem"
+    },
+    "virtual_acct_us": {
+      "bank_name": "Flutterwave / Evolve Bank USA",
+      "routing_no": "026073150",
+      "account_no": "934963395",
+      "account_name": "Ethan Ayoraheem",
+      "currency": "USD",
+      "reference": "@credionpay/ethanayoraheem"
+    },
+    "dva": {},
+    "invoices": []
+  },
+  "WAL-5B73867469": {
+    "wallet_id": "WAL-5B73867469",
+    "owner_name": "Adesina Janet Olufunke",
+    "owner_email": "ayotech@ayotechcom.com",
+    "phone": "07066812367",
+    "password_hash": "8ce094e2c27bcbd8fafaa189a71b142b:7d35887185e634691bfc4dc83e532050476cfe0ea7a24395fd9e93544a2e4970",
+    "balance": 73050.0,
+    "is_active": true,
+    "created_at": "2026-04-14T20:37:36.272266",
+    "kyc": {
+      "bvn": "enc:gAAAAABp4RxRzQpZYzr1W911_PWjeI5-D2q9cCXDZtbBNCCJaZo7AxHHZAR-cUJUntl3Cb1erprhNnb9sssYoDYXTWx9bgZu3A==",
+      "nin": "",
+      "full_name": "ADESINA JANET OLUFUNKE",
+      "dob": "1967-03-03",
+      "address": "",
+      "phone": "6827066108",
+      "account_number": "3042340440",
+      "bank_code": "011",
+      "bank_name": "First Bank of Nigeria",
+      "account_name": "ADESINA JANET OLUFUNKE",
+      "registered_cards": [],
+      "status": "verified",
+      "verified_at": "2026-04-16T12:28:49.973073",
+      "failure_reason": ""
+    },
+    "virtual_cards": [],
+    "transactions": [
+      {
+        "tx_id": "TX-8C2A2C6CED67",
+        "tx_type": "CREDIT",
+        "category": "CARD_FUNDING",
+        "amount": 10000.0,
+        "balance_after": 10000.0,
+        "status": "success",
+        "description": "Wallet top-up via Card",
+        "reference": "FUND-873A29C944A84B4E",
+        "timestamp": "2026-04-14T20:44:40.208516"
+      },
+      {
+        "tx_id": "TX-77DF789E806B",
+        "tx_type": "DEBIT",
+        "category": "BANK_PAYOUT",
+        "amount": 5000.0,
+        "balance_after": 5000.0,
+        "status": "success",
+        "description": "Bank transfer to Paystack Test Account (0000000000) \u2014 Bank Transfer",
+        "reference": "TRF-80DD7293F6ED42A7",
+        "timestamp": "2026-04-14T20:48:00.430061"
+      },
+      {
+        "tx_id": "TX-6191CC0BB33C",
+        "tx_type": "DEBIT",
+        "category": "BANK_PAYOUT",
+        "amount": 5000.0,
+        "balance_after": 0.0,
+        "status": "success",
+        "description": "Bank transfer to Paystack Test Account (0000000000) \u2014 Bank Transfer",
+        "reference": "TRF-5C9AA3537CB44FAE",
+        "timestamp": "2026-04-14T20:51:23.446617"
+      },
+      {
+        "tx_id": "TX-D1876BC22E75",
+        "tx_type": "CREDIT",
+        "category": "CARD_FUNDING",
+        "amount": 30000.0,
+        "balance_after": 30000.0,
+        "status": "success",
+        "description": "Wallet top-up via Card",
+        "reference": "FUND-D1C44F944E214526",
+        "timestamp": "2026-04-16T10:41:10.668599"
+      },
+      {
+        "tx_id": "TX-A75669C161A6",
+        "tx_type": "DEBIT",
+        "category": "BANK_PAYOUT",
+        "amount": 2000.0,
+        "balance_after": 28000.0,
+        "status": "success",
+        "description": "Bank transfer to Paystack Test Account (0000000000) \u2014 Bank Transfer",
+        "reference": "TRF-C2AFFB5FFC6F4D91",
+        "timestamp": "2026-04-16T10:42:37.655942"
+      },
+      {
+        "tx_id": "TX-08C1AA18D0CF",
+        "tx_type": "CREDIT",
+        "category": "CARD_FUNDING",
+        "amount": 50000.0,
+        "balance_after": 78000.0,
+        "status": "success",
+        "description": "Wallet top-up via Card",
+        "reference": "FUND-22E9CA40B0F54AE2",
+        "timestamp": "2026-04-16T12:29:50.715877"
+      },
+      {
+        "tx_id": "TX-DED48D5916A8",
+        "tx_type": "DEBIT",
+        "category": "whatsapp_pay_hold",
+        "amount": 2000.0,
+        "balance_after": 76000.0,
+        "status": "success",
+        "description": "WhatsApp Pay to Ibarahim (08067620990) \u2014 held in escrow",
+        "reference": "WHATSAPP-HOLD-WPAY-85E1850DCE4C",
+        "timestamp": "2026-04-20T11:26:51.583565"
+      },
+      {
+        "tx_id": "TX-EC24B248421B",
+        "tx_type": "CREDIT",
+        "category": "DVA_FUNDING",
+        "amount": 5000.0,
+        "balance_after": 81000.0,
+        "status": "success",
+        "description": "[SIMULATED] Received from Emeka Obi via GTBank | Wema Bank DVA | Ref: SIM-DVA-F8CFCA21A2C3",
+        "reference": "SIM-DVA-F8CFCA21A2C3",
+        "timestamp": "2026-04-21T12:07:00.916678"
+      },
+      {
+        "tx_id": "TX-001A4601408F",
+        "tx_type": "DEBIT",
+        "category": "WALLET_TRANSFER_OUT",
+        "amount": 7950.0,
+        "balance_after": 73050.0,
+        "status": "success",
+        "description": "USDT purchase \u2014 5.0000 USDT @ \u20a61,590",
+        "reference": "USDT-BUY-6E695B088F",
+        "timestamp": "2026-04-21T17:17:24.232293"
+      }
+    ],
+    "usd_balance": 0.0,
+    "usd_tag": "@credionpay/adesinajanetolufunke",
+    "virtual_acct_uk": {
+      "bank_name": "Flutterwave / Lloyds UK",
+      "sort_code": "04-00-75",
+      "account_no": "76603878",
+      "account_name": "Adesina Janet Olufunke",
+      "currency": "GBP",
+      "reference": "@credionpay/adesinajanetolufunke"
+    },
+    "virtual_acct_us": {
+      "bank_name": "Flutterwave / Evolve Bank USA",
+      "routing_no": "026073150",
+      "account_no": "946654480",
+      "account_name": "Adesina Janet Olufunke",
+      "currency": "USD",
+      "reference": "@credionpay/adesinajanetolufunke"
+    },
+    "dva": {
+      "bank_name": "Wema Bank",
+      "bank_code": "035",
+      "account_number": "0632617743",
+      "account_name": "ADESINA JANET OLUFUNKE",
+      "reference": "NF-DVA-WAL-5B73867469",
+      "currency": "NGN",
+      "mode": "demo",
+      "note": "Demo account. Switch to Paystack live key for a real bank account."
+    },
+    "invoices": []
+  },
+  "WAL-2530D8B688": {
+    "wallet_id": "WAL-2530D8B688",
+    "owner_name": "xxxbb nnn",
+    "owner_email": "txt@com",
+    "phone": "12344566",
+    "password_hash": "",
+    "balance": 0.0,
+    "is_active": true,
+    "created_at": "2026-04-15T22:22:04.057895",
+    "kyc": {
+      "bvn": "",
+      "nin": "",
+      "full_name": "",
+      "dob": "",
+      "address": "",
+      "phone": "",
+      "account_number": "",
+      "bank_code": "",
+      "bank_name": "",
+      "account_name": "",
+      "registered_cards": [],
+      "status": "pending",
+      "verified_at": "",
+      "failure_reason": ""
+    },
+    "virtual_cards": [],
+    "transactions": [],
+    "usd_balance": 0.0,
+    "usd_tag": "@credionpay/xxxbbnnn",
+    "virtual_acct_uk": {
+      "bank_name": "Flutterwave / Lloyds UK",
+      "sort_code": "04-00-75",
+      "account_no": "70880758",
+      "account_name": "xxxbb nnn",
+      "currency": "GBP",
+      "reference": "@credionpay/xxxbbnnn"
+    },
+    "virtual_acct_us": {
+      "bank_name": "Flutterwave / Evolve Bank USA",
+      "routing_no": "026073150",
+      "account_no": "986845157",
+      "account_name": "xxxbb nnn",
+      "currency": "USD",
+      "reference": "@credionpay/xxxbbnnn"
+    },
+    "dva": {},
+    "invoices": []
+  },
+  "WAL-9ABB94E7C1": {
+    "wallet_id": "WAL-9ABB94E7C1",
+    "owner_name": "Adeola Omolara",
+    "owner_email": "ayoraheem0000@gmail.com",
+    "phone": "+16827066108",
+    "password_hash": "c076906fff88cac4f798e4d31e0d32e5:ccbf18f2871a0fe1d55d44ac3ebbde0b68a99c6d83be8b4412e9ea0327eb57da",
+    "balance": 0.0,
+    "is_active": true,
+    "created_at": "2026-04-16T16:29:20.740379",
+    "kyc": {
+      "bvn": "enc:gAAAAABp4VUjRDdhqvPHwJmCOG8B0Ef96q-TaOkEsk4wehNwYgtKLkHyhRSTxKFNLmIMlO3Kzcc4_-vGRrW1DRoP7lgJWHkolg==",
+      "nin": "",
+      "full_name": "Adeola Omolara",
+      "dob": "1980-03-04",
+      "address": "",
+      "phone": "+16827066108",
+      "account_number": "0000000000",
+      "bank_code": "033",
+      "bank_name": "United Bank for Africa",
+      "account_name": "Paystack Test Account",
+      "registered_cards": [],
+      "status": "verified",
+      "verified_at": "2026-04-16T16:31:15.040196",
+      "failure_reason": ""
+    },
+    "virtual_cards": [],
+    "transactions": [],
+    "usd_balance": 0.0,
+    "usd_tag": "@credionpay/adeolaomolara",
+    "virtual_acct_uk": {
+      "bank_name": "Flutterwave / Lloyds UK",
+      "sort_code": "04-00-75",
+      "account_no": "71798087",
+      "account_name": "Adeola Omolara",
+      "currency": "GBP",
+      "reference": "@credionpay/adeolaomolara"
+    },
+    "virtual_acct_us": {
+      "bank_name": "Flutterwave / Evolve Bank USA",
+      "routing_no": "026073150",
+      "account_no": "914701380",
+      "account_name": "Adeola Omolara",
+      "currency": "USD",
+      "reference": "@credionpay/adeolaomolara"
+    },
+    "dva": {},
+    "invoices": []
+  }
+}
