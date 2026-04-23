@@ -6563,6 +6563,56 @@ def migrate_fix_accounts():
     }
 
 
+@app.post("/dev/upload-db")
+async def upload_db(request: Request):
+    """
+    ONE-TIME USE — Upload local DB files to Railway Volume.
+    POST JSON body: {"db": "..json content..", "savings": "..json..", "cards": "..json.."}
+    Delete or disable this endpoint after migration is complete.
+    """
+    body = await request.json()
+    uploaded = []
+
+    if "db" in body and body["db"]:
+        try:
+            parsed = json.loads(body["db"])   # validate JSON
+            DB_FILE.write_text(json.dumps(parsed, indent=2))
+            uploaded.append("credionpay_db.json")
+            logger.info("📤 DB file uploaded via /dev/upload-db")
+        except Exception as e:
+            raise HTTPException(400, f"Invalid DB JSON: {e}")
+
+    if "savings" in body and body["savings"]:
+        try:
+            parsed = json.loads(body["savings"])
+            SAVINGS_FILE.write_text(json.dumps(parsed, indent=2))
+            uploaded.append("credionpay_savings.json")
+        except Exception as e:
+            raise HTTPException(400, f"Invalid savings JSON: {e}")
+
+    if "cards" in body and body["cards"]:
+        try:
+            parsed = json.loads(body["cards"])
+            CARD_FILE.write_text(json.dumps(parsed, indent=2))
+            uploaded.append("credionpay_cards.json")
+        except Exception as e:
+            raise HTTPException(400, f"Invalid cards JSON: {e}")
+
+    if not uploaded:
+        raise HTTPException(400, "No data provided. Send {db: '...', savings: '...', cards: '...'}")
+
+    # Reload everything from disk
+    load_db()
+    _load_savings()
+    logger.info(f"✅ DB upload complete: {uploaded}")
+    return {
+        "success":  True,
+        "uploaded": uploaded,
+        "wallets":  len(wallets),
+        "message":  f"Uploaded {len(uploaded)} file(s). {len(wallets)} wallets now loaded.",
+    }
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # WHATSAPP PAY — Send money to anyone via WhatsApp link (no app needed)
 # ══════════════════════════════════════════════════════════════════════════════
