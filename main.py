@@ -102,7 +102,15 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="🇳🇬 CredionPay API", version="16.0.0")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
+)
 
 PAYSTACK_BASE_URL = "https://api.paystack.co"
 SUDO_BASE_URL     = "https://api.sudo.africa"
@@ -8061,3 +8069,4 @@ User context:
     except requests.RequestException as e:
         logger.error(f"AI chat request error: {e}")
         raise HTTPException(502, "Could not reach AI service. Check your connection.")
+
