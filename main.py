@@ -102,7 +102,15 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="🇳🇬 CredionPay API", version="16.0.0")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
+)
 
 PAYSTACK_BASE_URL = "https://api.paystack.co"
 SUDO_BASE_URL     = "https://api.sudo.africa"
@@ -737,6 +745,29 @@ logger.info(f"📂 Working directory: {_cwd}")
 logger.info(f"📄 DB file: {DB_FILE.resolve()} | exists={_db_exists} | size={_db_size} bytes")
 logger.info(f"🔑 Anthropic key: {'✅ set' if _os.getenv('ANTHROPIC_API_KEY') else '❌ MISSING'}")
 logger.info(f"💳 Paystack key: {'✅ set' if _os.getenv('PAYSTACK_SECRET_KEY') else '❌ MISSING'}")
+
+# ── Seed fallback — copy seed to Volume only if Volume DB is empty ────────────
+if not _db_exists or _db_size < 100:
+    for _seed in [
+        pathlib.Path("/app/credionpay_db.seed.json"),
+        pathlib.Path("/app/credionpay_db.json"),
+        _SCRIPT_DIR / "credionpay_db.seed.json",
+    ]:
+        if _seed.exists() and _seed.stat().st_size > 100:
+            try:
+                DB_FILE.write_text(_seed.read_text())
+                logger.info(f"🌱 Volume empty — seeded DB from {_seed}")
+                break
+            except Exception as _e:
+                logger.warning(f"Seed copy failed: {_e}")
+    for _cseed in [pathlib.Path("/app/credionpay_cards.seed.json"),
+                   _SCRIPT_DIR / "credionpay_cards.seed.json"]:
+        if _cseed.exists() and (not CARD_FILE.exists() or CARD_FILE.stat().st_size < 10):
+            try:
+                CARD_FILE.write_text(_cseed.read_text())
+                logger.info(f"🌱 Seeded cards from {_cseed}")
+            except Exception:
+                pass
 
 load_db()
 atexit.register(save_db)
@@ -6625,6 +6656,49 @@ async def upload_db(request: Request):
     }
 
 
+@app.post("/dev/reset-for-pilot")
+async def reset_for_pilot(request: Request):
+    """
+    PILOT TEST RESET — Wipes all wallets, savings, cards and starts fresh.
+    Requires confirmation: POST {"confirm": "RESET_CREDIONPAY_DB"}
+    Use before pilot testing to start with a clean slate.
+    """
+    body = await request.json()
+    if body.get("confirm") != "RESET_CREDIONPAY_DB":
+        raise HTTPException(400,
+            "Send {\"confirm\": \"RESET_CREDIONPAY_DB\"} to confirm reset.")
+
+    # Count what we're clearing
+    old_count = len(wallets)
+    old_savings = len(_savings_db)
+
+    # Clear in-memory
+    wallets.clear()
+    virtual_cards.clear()
+    email_index.clear()
+    phone_index.clear()
+    usd_tag_index.clear()
+    _savings_db.clear()
+
+    # Clear on disk
+    for f in [DB_FILE, CARD_FILE, SAVINGS_FILE]:
+        try:
+            f.write_text("{}")
+        except Exception as e:
+            logger.warning(f"Could not clear {f}: {e}")
+
+    logger.warning(
+        f"🗑️  PILOT RESET: Cleared {old_count} wallets, "
+        f"{old_savings} savings plans, all cards and indexes."
+    )
+    return {
+        "success":       True,
+        "wallets_cleared": old_count,
+        "savings_cleared": old_savings,
+        "message":       "Database wiped. Ready for fresh pilot testing.",
+    }
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # WHATSAPP PAY — Send money to anyone via WhatsApp link (no app needed)
 # ══════════════════════════════════════════════════════════════════════════════
@@ -7989,5 +8063,3 @@ User context:
     except requests.RequestException as e:
         logger.error(f"AI chat request error: {e}")
         raise HTTPException(502, "Could not reach AI service. Check your connection.")
-
- 
