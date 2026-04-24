@@ -102,15 +102,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="🇳🇬 CredionPay API", version="16.0.0")
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["*"],
-    expose_headers=["*"],
-    max_age=3600,
-)
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 PAYSTACK_BASE_URL = "https://api.paystack.co"
 SUDO_BASE_URL     = "https://api.sudo.africa"
@@ -555,83 +547,6 @@ DB_FILE      = _DATA_DIR / "credionpay_db.json"
 CARD_FILE    = _DATA_DIR / "credionpay_cards.json"
 ACCT_CACHE_FILE_DEFAULT = _DATA_DIR / "credionpay_acct_cache.json"
 
-# ── Seed files (shipped with the repo — never written to by the app) ──────────
-# These live in the script directory alongside main.py and serve as the
-# initial dataset for a fresh volume.  The app NEVER writes to these paths.
-_SEED_DB_FILE   = _SCRIPT_DIR / "credionpay_db.seed.json"
-_SEED_CARD_FILE = _SCRIPT_DIR / "credionpay_cards.seed.json"
-
-
-def _seed_volume_if_needed():
-    """
-    Copy seed files to the persistent volume on first deploy (or when the
-    volume file is missing / under-populated).
-
-    Rules:
-      * If DB_FILE does not exist -> copy seed unconditionally.
-      * If DB_FILE exists but is MISSING wallet entries that are in the seed ->
-        merge: keep all existing wallets, add any wallets that are in the
-        seed but not yet on the volume.  This recovers a partially-wiped
-        volume without losing any live user data.
-      * If DB_FILE already contains all seed wallet IDs -> do nothing.
-
-    The seed files are read-only references; this function never modifies them.
-    """
-    import shutil
-
-    # ── DB seed ───────────────────────────────────────────────────────────────
-    if _SEED_DB_FILE.exists():
-        try:
-            seed_data = json.loads(_SEED_DB_FILE.read_text())
-        except Exception as e:
-            logger.error(f"❌ Could not read seed DB file: {e}")
-            seed_data = {}
-
-        if not DB_FILE.exists():
-            # Fresh volume — copy seed wholesale
-            try:
-                shutil.copy2(str(_SEED_DB_FILE), str(DB_FILE))
-                logger.info(
-                    f"🌱 Seeded volume DB from {_SEED_DB_FILE.name} "
-                    f"({len(seed_data)} wallets) -> {DB_FILE}"
-                )
-            except Exception as e:
-                logger.error(f"❌ Failed to seed DB file: {e}")
-        else:
-            # Volume file exists — merge any missing seed wallets in
-            try:
-                existing_data = json.loads(DB_FILE.read_text())
-                missing = {k: v for k, v in seed_data.items() if k not in existing_data}
-                if missing:
-                    existing_data.update(missing)
-                    DB_FILE.write_text(json.dumps(existing_data, indent=2))
-                    logger.info(
-                        f"🌱 Merged {len(missing)} missing seed wallet(s) into volume DB "
-                        f"(total now: {len(existing_data)}): {list(missing.keys())}"
-                    )
-                else:
-                    logger.info(
-                        f"✅ Volume DB already has all seed wallets "
-                        f"({len(existing_data)} wallets on disk)"
-                    )
-            except Exception as e:
-                logger.error(f"❌ Failed to merge seed wallets: {e}")
-    else:
-        logger.warning(
-            f"⚠️  Seed DB file not found at {_SEED_DB_FILE} — "
-            "skipping volume seed (volume data preserved as-is)"
-        )
-
-    # ── Cards seed ────────────────────────────────────────────────────────────
-    if _SEED_CARD_FILE.exists() and not CARD_FILE.exists():
-        try:
-            shutil.copy2(str(_SEED_CARD_FILE), str(CARD_FILE))
-            logger.info(f"🌱 Seeded volume cards from {_SEED_CARD_FILE.name} -> {CARD_FILE}")
-        except Exception as e:
-            logger.error(f"❌ Failed to seed cards file: {e}")
-
-
-
 
 def save_db():
     try:
@@ -816,22 +731,15 @@ def load_db():
 # ── Startup diagnostics ──────────────────────────────────────────────────────
 import os as _os
 _cwd = _os.getcwd()
+_db_exists = DB_FILE.exists()
+_db_size   = DB_FILE.stat().st_size if _db_exists else 0
 logger.info(f"📂 Working directory: {_cwd}")
-logger.info(f"📄 DB file path: {DB_FILE.resolve()} | volume_path={_os.getenv('RAILWAY_VOLUME_MOUNT_PATH', 'not set')}")
-logger.info(f"🌱 Seed DB file: {_SEED_DB_FILE} | exists={_SEED_DB_FILE.exists()}")
+logger.info(f"📄 DB file: {DB_FILE.resolve()} | exists={_db_exists} | size={_db_size} bytes")
 logger.info(f"🔑 Anthropic key: {'✅ set' if _os.getenv('ANTHROPIC_API_KEY') else '❌ MISSING'}")
 logger.info(f"💳 Paystack key: {'✅ set' if _os.getenv('PAYSTACK_SECRET_KEY') else '❌ MISSING'}")
 
-_seed_volume_if_needed()   # must run BEFORE load_db() — seeds volume on first deploy
-
-# Log DB state after seeding so we see the real file size
-_db_exists = DB_FILE.exists()
-_db_size   = DB_FILE.stat().st_size if _db_exists else 0
-logger.info(f"📄 DB file: exists={_db_exists} | size={_db_size} bytes")
-
 load_db()
 atexit.register(save_db)
-
 
 # ── Rebuild phone_index for ALL wallets (catches pre-v16 wallets) ────────────
 def _rebuild_phone_index():
@@ -8069,4 +7977,3 @@ User context:
     except requests.RequestException as e:
         logger.error(f"AI chat request error: {e}")
         raise HTTPException(502, "Could not reach AI service. Check your connection.")
-

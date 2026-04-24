@@ -1,30 +1,30 @@
 {
   "VCR-1A4BC26E6E": {
     "card_id": "VCR-1A4BC26E6E",
-    "wallet_id": "WAL-A30F2DDDE0",
-    "card_type": "Visa USD Demo",
-    "card_number": "4111111111111111",
-    "masked_number": "**** **** **** 1111",
-    "expiry": "12/26",
-    "cvv": "123",
-    "balance": 6.29,
+    "wallet_id": "WAL-1DBD3D4BCB",
+    "card_number": "4032978176519678",
+    "masked_number": "**** **** **** 9678",
+    "expiry": "03/29",
+    "cvv": "345",
+    "card_type": "Visa \u00b7 USD (Demo)",
     "currency": "USD",
+    "balance": 6.29,
     "status": "active",
-    "sudo_card_id": "",
-    "created_at": "2024-01-15T10:30:00Z"
+    "created_at": "2026-03-26T21:49:41.988709",
+    "sudo_card_id": ""
   },
   "VCR-E102B931D2": {
     "card_id": "VCR-E102B931D2",
-    "wallet_id": "WAL-A30F2DDDE0",
-    "card_type": "Visa USD Demo",
-    "card_number": "4111111111111112",
-    "masked_number": "**** **** **** 1112",
-    "expiry": "12/26",
-    "cvv": "456",
-    "balance": 0.63,
+    "wallet_id": "WAL-0FFEEED536",
+    "card_number": "4137911542824218",
+    "masked_number": "**** **** **** 4218",
+    "expiry": "04/29",
+    "cvv": "236",
+    "card_type": "Visa \u00b7 USD (Demo)",
     "currency": "USD",
+    "balance": 0.63,
     "status": "active",
-    "sudo_card_id": "",
-    "created_at": "2024-02-20T14:45:00Z"
+    "created_at": "2026-04-13T21:06:31.877796",
+    "sudo_card_id": ""
   }
 }
