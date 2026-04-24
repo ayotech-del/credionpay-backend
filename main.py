@@ -6567,39 +6567,51 @@ def migrate_fix_accounts():
 async def upload_db(request: Request):
     """
     ONE-TIME USE — Upload local DB files to Railway Volume.
-    POST JSON body: {"db": "..json content..", "savings": "..json..", "cards": "..json.."}
-    Delete or disable this endpoint after migration is complete.
+    Accepts db/savings/cards as either raw JSON strings or already-parsed dicts.
     """
     body = await request.json()
     uploaded = []
 
+    def _parse_field(val):
+        """Accept either a string (raw JSON) or already-parsed dict/list."""
+        if val is None or val == "" or val == "{}":
+            return None
+        if isinstance(val, (dict, list)):
+            return val          # already parsed by FastAPI
+        if isinstance(val, str):
+            return json.loads(val)   # raw JSON string
+        return None
+
     if "db" in body and body["db"]:
         try:
-            parsed = json.loads(body["db"])   # validate JSON
-            DB_FILE.write_text(json.dumps(parsed, indent=2))
-            uploaded.append("credionpay_db.json")
-            logger.info("📤 DB file uploaded via /dev/upload-db")
+            parsed = _parse_field(body["db"])
+            if parsed:
+                DB_FILE.write_text(json.dumps(parsed, indent=2))
+                uploaded.append("credionpay_db.json")
+                logger.info("📤 DB file uploaded via /dev/upload-db")
         except Exception as e:
             raise HTTPException(400, f"Invalid DB JSON: {e}")
 
     if "savings" in body and body["savings"]:
         try:
-            parsed = json.loads(body["savings"])
-            SAVINGS_FILE.write_text(json.dumps(parsed, indent=2))
-            uploaded.append("credionpay_savings.json")
+            parsed = _parse_field(body["savings"])
+            if parsed:
+                SAVINGS_FILE.write_text(json.dumps(parsed, indent=2))
+                uploaded.append("credionpay_savings.json")
         except Exception as e:
             raise HTTPException(400, f"Invalid savings JSON: {e}")
 
     if "cards" in body and body["cards"]:
         try:
-            parsed = json.loads(body["cards"])
-            CARD_FILE.write_text(json.dumps(parsed, indent=2))
-            uploaded.append("credionpay_cards.json")
+            parsed = _parse_field(body["cards"])
+            if parsed:
+                CARD_FILE.write_text(json.dumps(parsed, indent=2))
+                uploaded.append("credionpay_cards.json")
         except Exception as e:
             raise HTTPException(400, f"Invalid cards JSON: {e}")
 
     if not uploaded:
-        raise HTTPException(400, "No data provided. Send {db: '...', savings: '...', cards: '...'}")
+        raise HTTPException(400, "No valid data found in request body.")
 
     # Reload everything from disk
     load_db()
