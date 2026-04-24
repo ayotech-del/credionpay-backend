@@ -7989,5 +7989,5 @@ User context:
     except requests.RequestException as e:
         logger.error(f"AI chat request error: {e}")
         raise HTTPException(502, "Could not reach AI service. Check your connection.")
-#   p i l o t   r e s e t  
+#   p i l o t   r e s e t 
  
