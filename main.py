@@ -3495,50 +3495,72 @@ def buy_airtime(req: AirtimeRequest, bg: BackgroundTasks):
 
 @app.get("/data/plans/{network}")
 def get_data_plans(network: str):
-    """Fetch available data plans for a network from Paystack."""
-    network = network.upper()
-    try:
-        resp = paystack_get(f"/decision/bin/data_plans", {"provider": NETWORK_CODES.get(network, network)})
-        if resp.get("status") and resp.get("data"):
-            return {"success": True, "source": "paystack", "plans": resp["data"]}
-    except Exception:
-        pass
+    """Fetch available data plans for a network — hardcoded Nigerian plans."""
+    network = network.upper().strip()
 
-    # Fallback: hardcoded popular plans
-    fallback_plans = {
+    all_plans = {
         "MTN": [
-            {"code": "mtn-100MB-1day",  "name": "100MB",  "validity": "1 Day",   "amount": 100},
-            {"code": "mtn-500MB-7day",  "name": "500MB",  "validity": "7 Days",  "amount": 300},
-            {"code": "mtn-1GB-30day",   "name": "1GB",    "validity": "30 Days", "amount": 1000},
-            {"code": "mtn-2GB-30day",   "name": "2GB",    "validity": "30 Days", "amount": 1500},
-            {"code": "mtn-5GB-30day",   "name": "5GB",    "validity": "30 Days", "amount": 2500},
-            {"code": "mtn-10GB-30day",  "name": "10GB",   "validity": "30 Days", "amount": 4000},
-            {"code": "mtn-20GB-30day",  "name": "20GB",   "validity": "30 Days", "amount": 6000},
+            {"code": "mtn-50MB-1day",   "name": "50MB",   "validity": "1 Day",    "amount": 50},
+            {"code": "mtn-100MB-1day",  "name": "100MB",  "validity": "1 Day",    "amount": 100},
+            {"code": "mtn-200MB-3day",  "name": "200MB",  "validity": "3 Days",   "amount": 200},
+            {"code": "mtn-500MB-7day",  "name": "500MB",  "validity": "7 Days",   "amount": 300},
+            {"code": "mtn-1GB-30day",   "name": "1GB",    "validity": "30 Days",  "amount": 1000},
+            {"code": "mtn-2GB-30day",   "name": "2GB",    "validity": "30 Days",  "amount": 1500},
+            {"code": "mtn-3GB-30day",   "name": "3GB",    "validity": "30 Days",  "amount": 2000},
+            {"code": "mtn-5GB-30day",   "name": "5GB",    "validity": "30 Days",  "amount": 2500},
+            {"code": "mtn-10GB-30day",  "name": "10GB",   "validity": "30 Days",  "amount": 4000},
+            {"code": "mtn-15GB-30day",  "name": "15GB",   "validity": "30 Days",  "amount": 5500},
+            {"code": "mtn-20GB-30day",  "name": "20GB",   "validity": "30 Days",  "amount": 6000},
+            {"code": "mtn-40GB-30day",  "name": "40GB",   "validity": "30 Days",  "amount": 10000},
+            {"code": "mtn-75GB-30day",  "name": "75GB",   "validity": "30 Days",  "amount": 15000},
+            {"code": "mtn-120GB-30day", "name": "120GB",  "validity": "30 Days",  "amount": 20000},
         ],
         "GLO": [
-            {"code": "glo-200MB-3day",  "name": "200MB",  "validity": "3 Days",  "amount": 200},
-            {"code": "glo-1GB-30day",   "name": "1GB",    "validity": "30 Days", "amount": 500},
-            {"code": "glo-2GB-30day",   "name": "2GB",    "validity": "30 Days", "amount": 1000},
-            {"code": "glo-5GB-30day",   "name": "5GB",    "validity": "30 Days", "amount": 2000},
-            {"code": "glo-10GB-30day",  "name": "10GB",   "validity": "30 Days", "amount": 3000},
-            {"code": "glo-15GB-30day",  "name": "15GB",   "validity": "30 Days", "amount": 4000},
+            {"code": "glo-100MB-1day",  "name": "100MB",  "validity": "1 Day",    "amount": 100},
+            {"code": "glo-200MB-3day",  "name": "200MB",  "validity": "3 Days",   "amount": 200},
+            {"code": "glo-500MB-14day", "name": "500MB",  "validity": "14 Days",  "amount": 500},
+            {"code": "glo-1GB-30day",   "name": "1GB",    "validity": "30 Days",  "amount": 500},
+            {"code": "glo-2GB-30day",   "name": "2GB",    "validity": "30 Days",  "amount": 1000},
+            {"code": "glo-3GB-30day",   "name": "3GB",    "validity": "30 Days",  "amount": 1500},
+            {"code": "glo-5GB-30day",   "name": "5GB",    "validity": "30 Days",  "amount": 2000},
+            {"code": "glo-7GB-30day",   "name": "7GB",    "validity": "30 Days",  "amount": 2500},
+            {"code": "glo-10GB-30day",  "name": "10GB",   "validity": "30 Days",  "amount": 3000},
+            {"code": "glo-15GB-30day",  "name": "15GB",   "validity": "30 Days",  "amount": 4000},
+            {"code": "glo-20GB-30day",  "name": "20GB",   "validity": "30 Days",  "amount": 5000},
+            {"code": "glo-50GB-30day",  "name": "50GB",   "validity": "30 Days",  "amount": 10000},
+            {"code": "glo-100GB-30day", "name": "100GB",  "validity": "30 Days",  "amount": 18000},
         ],
         "AIRTEL": [
-            {"code": "airtel-300MB-7day",  "name": "300MB", "validity": "7 Days",  "amount": 300},
-            {"code": "airtel-1GB-30day",   "name": "1GB",   "validity": "30 Days", "amount": 1000},
-            {"code": "airtel-2GB-30day",   "name": "2GB",   "validity": "30 Days", "amount": 1500},
-            {"code": "airtel-5GB-30day",   "name": "5GB",   "validity": "30 Days", "amount": 2500},
-            {"code": "airtel-10GB-30day",  "name": "10GB",  "validity": "30 Days", "amount": 4500},
+            {"code": "airtel-100MB-1day",  "name": "100MB", "validity": "1 Day",    "amount": 100},
+            {"code": "airtel-200MB-3day",  "name": "200MB", "validity": "3 Days",   "amount": 200},
+            {"code": "airtel-500MB-7day",  "name": "500MB", "validity": "7 Days",   "amount": 300},
+            {"code": "airtel-1GB-30day",   "name": "1GB",   "validity": "30 Days",  "amount": 1000},
+            {"code": "airtel-2GB-30day",   "name": "2GB",   "validity": "30 Days",  "amount": 1500},
+            {"code": "airtel-3GB-30day",   "name": "3GB",   "validity": "30 Days",  "amount": 2000},
+            {"code": "airtel-5GB-30day",   "name": "5GB",   "validity": "30 Days",  "amount": 2500},
+            {"code": "airtel-10GB-30day",  "name": "10GB",  "validity": "30 Days",  "amount": 4500},
+            {"code": "airtel-15GB-30day",  "name": "15GB",  "validity": "30 Days",  "amount": 6000},
+            {"code": "airtel-20GB-30day",  "name": "20GB",  "validity": "30 Days",  "amount": 8000},
+            {"code": "airtel-40GB-30day",  "name": "40GB",  "validity": "30 Days",  "amount": 12000},
         ],
         "9MOBILE": [
-            {"code": "9mobile-500MB-30day", "name": "500MB", "validity": "30 Days", "amount": 500},
-            {"code": "9mobile-1GB-30day",   "name": "1GB",   "validity": "30 Days", "amount": 1000},
-            {"code": "9mobile-2GB-30day",   "name": "2GB",   "validity": "30 Days", "amount": 2000},
-            {"code": "9mobile-5GB-30day",   "name": "5GB",   "validity": "30 Days", "amount": 3500},
+            {"code": "9mobile-100MB-1day",  "name": "100MB", "validity": "1 Day",    "amount": 100},
+            {"code": "9mobile-500MB-7day",  "name": "500MB", "validity": "7 Days",   "amount": 300},
+            {"code": "9mobile-1GB-30day",   "name": "1GB",   "validity": "30 Days",  "amount": 1000},
+            {"code": "9mobile-1.5GB-30day", "name": "1.5GB", "validity": "30 Days",  "amount": 1200},
+            {"code": "9mobile-2GB-30day",   "name": "2GB",   "validity": "30 Days",  "amount": 2000},
+            {"code": "9mobile-3GB-30day",   "name": "3GB",   "validity": "30 Days",  "amount": 2500},
+            {"code": "9mobile-5GB-30day",   "name": "5GB",   "validity": "30 Days",  "amount": 3500},
+            {"code": "9mobile-10GB-30day",  "name": "10GB",  "validity": "30 Days",  "amount": 6000},
+            {"code": "9mobile-15GB-30day",  "name": "15GB",  "validity": "30 Days",  "amount": 8000},
         ],
     }
-    plans = fallback_plans.get(network, [])
-    return {"success": True, "source": "fallback", "plans": plans}
+
+    plans = all_plans.get(network, [])
+    if not plans:
+        raise HTTPException(400, f"Unknown network: {network}. Use MTN, GLO, AIRTEL, or 9MOBILE")
+
+    return {"success": True, "network": network, "plans": plans, "count": len(plans)}
 
 
 @app.post("/data/buy")
